@@ -80,6 +80,7 @@
             <div class="content">
                 <div class="title m-b-md">
                         <h1>Hello le van toan</h1>
+                        <p>Co 1 so thay doi</p>
                 </div>
 
                 <div class="links">
