@@ -16,8 +16,3 @@ Route::get('/', function () {
     return view('welcome', compact('n'));
 });
 
-// Route::get('/demo/{thu}', function(){
-// 	$thu
-// 	return view('demo');
-// });
-Route::view('/welcome', 'welcome');
