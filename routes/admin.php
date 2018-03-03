@@ -1,6 +1,3 @@
-<?php
+<?php 
 
-Route::get('/', function () {
-	
-    return "Day la giao dien admin side";
-});
+Route::get('/', 'HomeController@index')->name('home.index');
