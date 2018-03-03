@@ -20,3 +20,4 @@ Route::get('/', function () {
 // 	$thu
 // 	return view('demo');
 // });
+Route::view('/welcome', 'welcome');
