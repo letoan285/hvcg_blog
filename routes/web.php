@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-	$n = "Ms Hue";
-    return view('welcome', compact('n'));
+	// $n = "Ms Hue";
+ //    return view('welcome', compact('n'));
+	return 'hello';
 });
 
