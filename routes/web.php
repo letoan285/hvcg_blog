@@ -12,8 +12,11 @@
 */
 
 Route::get('/', function () {
-	// $n = "Ms Hue";
- //    return view('welcome', compact('n'));
-	return 'hello';
+    return view('welcome');
+	// return 'hello';
 });
 
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
