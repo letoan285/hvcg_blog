@@ -30,8 +30,8 @@
 						<tr>
 							<td>{{ $loop->iteration }}</td>
 							<td>{{ $category->name }}</td>
-							<td>{{ $category->parent_id }}</td>
-							<td>{{ $category->status }}</td>
+							<td>{{ $category->getParentName() }}</td>
+							<td>{{ $category->getStatus() }}</td>
 							<td>
 								<a class="btn btn-sm btn-info" href="">
 									<i class="fa fa-pencil"></i>
@@ -42,6 +42,7 @@
 						@endforeach
 					</tbody>
 				</table>
+				{{ $categories->links() }}
 			</div>
 		</div>
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
 use App\Category;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -16,9 +18,6 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        // foreach ($posts as $post) {
-            
-        // }
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -31,7 +30,9 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -57,6 +58,7 @@ class PostsController extends Controller
         $post->description = $request->description;
 
         $post->save();
+        $post->tags()->sync($request->tags, false);
 
         return redirect()->route('posts.index');
     }
@@ -70,8 +72,25 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('admin.posts.show', compact('post'));
+        $comments = $post->comments;
+        $query = "SELECT p.id, 
+                        p.name, 
+                        t.id as tag_id, 
+                        t.name as tag_name 
+                from posts as p 
+                    left join term_post_tag as tp on tp.post_id = p.id
+                    left join tags as t on t.id = tp.tag_id 
+                where p.id = $id";
+
+        $p = DB::select(DB::raw($query));
+        $post->tags = $p;
+
+        return response()->json($post);
+        // return response()->json([$post, $comments]);
+        return view('admin.posts.show', compact('post', 'comments'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

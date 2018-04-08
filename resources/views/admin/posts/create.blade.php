@@ -37,6 +37,16 @@
 							<option value="0">Ẩn</option>
 						</select>
 					</div>
+
+					<div class="form-group">
+						<label for="">Chọn thẻ tags</label>
+						<select name="tags[]" id="" class="form-control multi-option" multiple>
+							@foreach ($tags as $tag)
+								<option value="{{$tag->id}}">{{$tag->name}}</option>
+							@endforeach
+						</select>
+					</div>
+
 					<div class="form-group">
 						<textarea name="description" class="form-control" cols="10" rows="10" placeholder="Nội dung bài viết..."></textarea>
 					</div>
@@ -49,7 +59,14 @@
     </div>
 </div>
 
+@endsection
 
-
+@section('js')
+<script>
+	
+	$(document).ready(function(){
+		$('.multi-option').select2();
+	});
+</script>
 @endsection
 
