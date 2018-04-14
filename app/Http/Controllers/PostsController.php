@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SavePostRequest;
 use App\Post;
 use App\Tag;
 use App\Category;
@@ -15,11 +16,15 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
+        $keyword = $request->keyword;
 
-        return view('admin.posts.index', compact('posts'));
+        $posts = Post::where('name','like', "%$keyword%")
+                        ->orwhere('description', 'like', "%$keyword%")
+                        ->paginate(5);
+
+        return view('admin.posts.index', compact('posts', 'keyword'));
     }
 
     /**
@@ -41,19 +46,22 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SavePostRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required'
-        ]);
-
+        
         $post = new Post();
 
         $post->name = $request->name;
         $post->slug = str_slug($request->name, '-');
         $post->category_id = $request->category_id;
-        $post->image = $request->image;
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileName = time().$file->getClientOriginalName();
+            $file->storeAs('uploads/posts', $fileName);
+            $post->image = 'uploads/posts/'.$fileName;
+        }
+
         $post->status = $request->status;
         $post->description = $request->description;
 

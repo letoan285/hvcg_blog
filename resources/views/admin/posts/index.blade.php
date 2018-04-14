@@ -10,12 +10,20 @@
     </div>
     <div class="box-body">
     	<div class="row">
+    		<div class="col-md-6">
+	    		<form method="GET" class="form-inline">
+	    			<input type="text" class="form-control" name="keyword" value="{{$keyword}}" placeholder="Tim bai viet..">
+	    			<button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+	    		</form>
+    		</div>
+    	</div><br>
+    	<div class="row">
 			<div class="col-md-12">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 							<th>STT</th>
-							<th>Ảnh</th>
+							<th width="120">Ảnh</th>
 							<th>Tên bài viết</th>
 							<th>Slug</th>
 							<th>Tags</th>
@@ -33,7 +41,10 @@
 						@foreach ($posts as $post)
 							<tr>
 								<td>{{ $loop->iteration }}</td>
-								<td>{{ $post->image }}</td>
+								<td>
+									<img width="120" src="{{ asset($post->image) }}" alt="anh">
+									{{-- {{$post->image}} --}}
+								</td>
 								<td><a href="{{ route('posts.show', ['id'=>$post->id]) }}">{{ $post->name }}</a></td>
 								<td>{{ $post->slug }}</td>
 								<td>
@@ -51,15 +62,13 @@
 									<a class="btn btn-danger" onclick="confirmRemove('{{route('posts.destroy', ['id'=>$post->id])}}')" href="javascript:;">
 										<i class="fa fa-times"></i>
 									</a>
-									{{-- <a class="btn btn-danger" href="{{ route('posts.destroy', ['id'=>$post->id]) }}">
-										<i class="fa fa-times"></i>
-									</a> --}}
 								</td>
 							</tr>
 						@endforeach
 
 					</tbody>
 				</table>
+				{{ $posts->links() }}
 			</div>
 		</div>
 

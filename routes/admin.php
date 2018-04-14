@@ -10,7 +10,7 @@ Route::post('categories', 'CategoryController@store')->name('categories.store');
 
 Route::get('posts', 'PostsController@index')->name('posts.index');
 
-Route::get('posts/create', 'PostsController@create')->name('posts.create');
+Route::get('posts/create', 'PostsController@create')->name('posts.create')->middleware('isAdmin');
 
 Route::post('posts', 'PostsController@store')->name('posts.store');
 

@@ -16,6 +16,11 @@
 					<div class="form-group">
 						<label for="">Tên bài viết</label>
 						<input type="text" name="name" class="form-control" placeholder="Tên bài viết...">
+						@if (count($errors->has('name'))> 0)
+							<span class="help-block">
+								<strong style="color:red;">{{$errors->first('name')}}</strong>
+							</span>
+						@endif
 					</div>
 					<div class="form-group">
 						<label for="">Ảnh đại diện</label>
@@ -49,6 +54,11 @@
 
 					<div class="form-group">
 						<textarea name="description" class="form-control" cols="10" rows="10" placeholder="Nội dung bài viết..."></textarea>
+						@if (count($errors->has('description'))> 0)
+							<span class="help-block">
+								<strong style="color:red;">{{$errors->first('description')}}</strong>
+							</span>
+						@endif
 					</div>
 					<div class="form-group">
 						<button class="btn btn-success" type="submit">Thêm mới</button>
