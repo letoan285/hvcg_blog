@@ -18,6 +18,7 @@ class PostTableSeeder extends Seeder
         		'name' => $faker->name,
         		'image' => $faker->imageUrl($width = 640, $height = 480),
         		'description' => $faker->realText(rand(10,20)),
+                'status' => 1,
         		'category_id' => rand(1,5)
         	];
         	DB::table('posts')->insert($post);

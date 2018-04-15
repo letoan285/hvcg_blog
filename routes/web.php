@@ -11,11 +11,16 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// 	// return 'hello';
+// });
+
 Route::get('/', function () {
-    return view('welcome');
-	// return 'hello';
+    return view('web.index');
 });
 
+Route::get('admin-login', 'ClientController@login');
 
 Auth::routes();
 

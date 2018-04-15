@@ -52,7 +52,7 @@
 									<span class="label label-default"><a href="">{{ $tag->name }}</a></span>
 									@endforeach
 								</td>
-								<td>{{ str_limit($post->description, 100) }}</td>
+								<td>{!! str_limit($post->description, 100) !!}</td>
 								<td>{{ $post->category->name }}</td>
 								<td>{{ $post->getStatus() }}</td>
 								<td>
