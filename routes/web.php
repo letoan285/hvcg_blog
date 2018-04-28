@@ -16,9 +16,10 @@
 // 	// return 'hello';
 // });
 
-Route::get('/', function () {
-    return view('web.index');
-});
+Route::get('/', 'ClientController@index')->name('web.index');
+Route::get('/{id}', 'ClientController@show')->name('web.show');
+
+// Route::get('/categories', 'ClientController@getCateList')->name('cate.list');
 
 Route::get('admin-login', 'ClientController@login');
 
